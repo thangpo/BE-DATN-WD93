@@ -12,6 +12,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ROLE_ADMIN = 'Admin';
+    const ROLE_USER = 'User';
+    const ROLE_DOCTOR = 'Doctor';
+    const ROLE_PHARMACIST = 'Pharmacist';
+    const ROLE_GUEST = 'Guest';
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,8 +26,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'phone',
+        'address',
         'email',
         'password',
+        'image',
+        'role'
     ];
 
     /**
