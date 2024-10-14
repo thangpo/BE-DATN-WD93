@@ -15,4 +15,8 @@ class AvailableTimeslot extends Model
         return $this->belongsTo(Doctor::class); //$this đại diện cho thể hiện hiện tại của lớp Product
         //Phương thức belongsTo của Eloquent ORM được sử dụng để xác định mối quan hệ "belongs to" (thuộc về) giữa mô hình Product và mô hình Category.
     }
+    public function appoinment()
+    {
+        return $this->hasMany(Appoinment::class);
+    }
 }

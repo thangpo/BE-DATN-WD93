@@ -43,11 +43,11 @@ class Bill extends Model
     const DA_THANH_TOAN = 'da_thanh_toan';
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id'); //$this đại diện cho thể hiện hiện tại của lớp Product
+        return $this->belongsTo(User::class); //$this đại diện cho thể hiện hiện tại của lớp Product
         //Phương thức belongsTo của Eloquent ORM được sử dụng để xác định mối quan hệ "belongs to" (thuộc về) giữa mô hình Product và mô hình Category.
     }
-    // public function order_detail()
-    // {
-    //     return $this->hasMany(order_detail::class);
-    // }
+    public function order_detail()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

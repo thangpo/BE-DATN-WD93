@@ -52,4 +52,8 @@ class Appoinment extends Model
     {
         return $this->belongsTo(AvailableTimeslot::class); // thiết lập mối quan hệ một-nhiều (one-to-many) giữa bảng categories và bảng products.
     }
+    public function appoinmentHistory()
+    {
+        return $this->hasMany(AppoinmentHistory::class);
+    }
 }
