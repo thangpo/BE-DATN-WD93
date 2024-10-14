@@ -68,7 +68,7 @@ class Product extends Model
 
     public function scopeBestsellerProducts($query, $limit)
     {
-        return $query->where('sold', '>', 0)->orderBy('sold', 'desc')->limit($limit)->with(['category']);
+        return $query->where('quantity', '>', 0)->orderBy('quantity', 'desc')->limit($limit)->with(['category']);
     }
 
     public function scopeInStockProducts($query, $limit)
