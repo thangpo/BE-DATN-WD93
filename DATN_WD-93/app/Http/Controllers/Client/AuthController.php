@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,12 +22,12 @@ class AuthController extends Controller
     // }
     public function login(Request $request)
     {
-        $accounts = $request->validate([
+        $users = $request->validate([
             'email' => ['required' => 'string', 'email', 'max:255'],
             'password' => ['required' => 'string']
         ]);
-        //   dd($accounts);
-        if (Auth::attempt($accounts)) {
+        //   dd($users);
+        if (Auth::attempt($users)) { //kiem tra in user_table co trung ko
             return redirect()->route('loginSuccess');
         }
         return redirect()->back()->withErrors([
@@ -92,38 +93,39 @@ class AuthController extends Controller
         $categories = Category::orderBy('name', 'asc')->get();
         return view('client.auth_backup.register', compact('categories'));
     }
-    // public function register(Request $request)
-    // {
-    //     $data = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'phone' => 'required|string|max:15',
-    //         'address' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255',
-    //         'username' => 'required|string|max:255',
-    //         'password' => 'required|string|min:8',
-    //         'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
-    //     // Xử lý việc upload ảnh
-    //     if ($request->hasFile('image')) {
-    //         $imageName = time() . '.' . $request->image->extension();
-    //         $request->image->move(public_path('upload'), $imageName);
-    //         $data['image'] = $imageName;
-    //     }
+    public function register(Request $request)
+    {
+        //     $data= $request->all();
+        //     dd($data);
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'address' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8',
+            'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        // Xử lý việc upload ảnh
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('upload'), $imageName);
+            $data['image'] = $imageName;
+        }
 
-    //     // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-    //     // $data['password'] = bcrypt($data['password']);
+        // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+        // $data['password'] = bcrypt($data['password']);
 
-    //     // Tạo người dùng mới
-    //     $user = User::query()->create($data);
+        // Tạo người dùng mới
+        $user = User::query()->create($data);
 
-    //     // Đăng nhập người dùng sau khi đăng ký
-    //     Auth::login($user);
+        // Đăng nhập người dùng sau khi đăng ký
+        Auth::login($user);
 
-    //     return redirect()->route('viewRegister');
-    // }
-    // public function logout(Request $request)
-    // {
-    //     Auth::logout();
-    //     return redirect()->route('viewLogin');
-    // }
+        return redirect()->route('viewRegister');
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('viewLogin');
+    }
 }

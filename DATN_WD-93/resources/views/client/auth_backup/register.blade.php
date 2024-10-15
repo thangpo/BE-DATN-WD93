@@ -6,63 +6,6 @@
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" type="text/javascript"></script>
-<script>
-  $().ready(function() {
-    $("#demoForm").validate({
-      onfocusout: false,
-      onkeyup: false,
-      onclick: false,
-      rules: {
-        "username": {
-          required: true,
-          maxlength: 10
-        },
-        "password": {
-          required: true,
-          minlength: 3
-        },
-        "name": {
-          required: true,
-          minlength: 5
-        },
-        "address": {
-          required: true,
-        },
-        "phone": {
-          required: true,
-        },
-        "email": {
-          required: true,
-          email: true
-        }
-      },
-      messages: {
-        "username": {
-          required: "Bắt buộc nhập username",
-          maxlength: "Hãy nhập tối đa 10 ký tự"
-        },
-        "password": {
-          required: "Bắt buộc nhập password",
-          minlength: "Hãy nhập ít nhất 3 ký tự"
-        },
-        "name": {
-          required: "Bắt buộc nhập ho ten",
-          maxlength: "Hãy nhập ít nhất 5 ký tự"
-        },
-        "address": {
-          required: "Bắt buộc nhập address",
-        },
-        "phone": {
-          required: "Bắt buộc nhập phone",
-        },
-        "email": {
-          required: "Bắt buộc nhập email",
-          email: "Hãy nhập dúng định dạng email"
-        }
-      }
-    });
-  });
-</script>
 <style>
   label.error {
     color: red;
@@ -94,60 +37,53 @@
                     <div class="form-group">
                         <label>FullName</label>
                         <input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your FullName" value="{{ old('name') }}" />
-                        {{-- @error('name')
+                        @error('name')
                         <p class="text-danger">{{ $message }}</p>
-                    @enderror --}}
+                    @enderror
                       </div>
-                    <div class="form-group">
-                      <label>UserName</label>
-                      <input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" value="{{ old('username') }}" />
-                      {{-- @error('username')
-                      <p class="text-danger">{{ $message }}</p>
-                      @enderror --}}
-                    </div>
                     <div class="form-group">
                       <label>Password</label>
                       <input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password"
-                       name="password" placeholder="Enter password" value="{{ old('password') }}" required autocomplete="new-password" />
-                      {{-- @error('password')
+                       name="password" placeholder="Enter password" value="{{ old('password') }}" autocomplete="new-password" />
+                      @error('password')
                       <p class="text-danger">{{ $message }}</p>
-                      @enderror --}}
+                      @enderror
                     </div>
                     <div class="form-group">
                         <label>Confirm Password</label>
                         <input class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" type="password"
-                        name="password_confirmation" placeholder="Confirm password" value="{{ old('password_confirmation') }}" required autocomplete="new-password" />
-                        {{-- @error('password_confirmation')
+                        name="password_confirmation" placeholder="Confirm password" value="{{ old('password_confirmation') }}" autocomplete="new-password" />
+                        @error('password_confirmation')
                         <p class="text-danger">{{ $message }}</p>
-                        @enderror --}}
+                        @enderror
                       </div>
                     <div class="form-group">
                       <label>Email</label>
                       <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" />
-                      {{-- @error('email')
+                      @error('email')
                       <p class="text-danger">{{ $message }}</p>
-                  @enderror --}}
+                  @enderror
                     </div>
                     <div class="form-group">
                       <label>Address</label>
                       <input class="form-control form-control-lg" type="text" name="address" placeholder="Enter your address" value="{{ old('address') }}" />
-                      {{-- @error('address')
+                      @error('address')
                       <p class="text-danger">{{ $message }}</p>
-                  @enderror --}}
+                  @enderror
                     </div>
                     <div class="form-group">
                       <label>Phone</label>
                       <input class="form-control form-control-lg" type="text" name="phone" placeholder="Enter your phone" value="{{ old('phone') }}" />
-                      {{-- @error('phone')
+                      @error('phone')
                       <p class="text-danger">{{ $message }}</p>
-                  @enderror --}}
+                  @enderror
                     </div>
                     <div class="form-group">
                       <label>Image</label>
                       <input class="form-control form-control-lg" type="file" name="image" placeholder="Enter your image" value="{{ old('image') }}" />
-                      {{-- @error('image')
+                      @error('image')
                       <p class="text-danger">{{ $message }}</p>
-                  @enderror --}}
+                  @enderror
                     </div>
                     <div class="text-center mt-3">
                       <input type="submit" href="#" class="btn btn-lg btn-primary" name="signUp" value="Sign up">

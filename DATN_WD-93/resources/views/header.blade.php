@@ -120,6 +120,15 @@
                   style="padding-bottom: 2px"
                 ></span>
               </a>
+              @if(auth()->check())
+              <a href="{{ route('account') }}" class="btn px-0">
+                <i class="fas fa-user" style="color: #ffd43b"></i>
+                <span
+                  class="badge text-secondary border border-secondary rounded-circle"
+                  style="padding-bottom: 2px"
+                ></span>
+              </a>
+              @else
               <a href="{{ route('viewLogin') }}" class="btn px-0">
                 <i class="fas fa-user" style="color: #ffd43b"></i>
                 <span
@@ -127,6 +136,7 @@
                   style="padding-bottom: 2px"
                 ></span>
               </a>
+              @endif
             </div>
           </div>
         </nav>

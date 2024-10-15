@@ -70,7 +70,7 @@ use Illuminate\Support\Facades\File;
                     @csrf
                     <div class="form-group">
                       <label>Email</label>
-                      <input class="form-control form-control-lg @error('email') is-invalid @enderror " type="email" name="email"
+                      <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="email" name="email"
                        placeholder="Enter your Email" value="{{ old('email') }}" autocomplete="email" />
                      @error('email')
                      <span class="invalid-feedback" role="alert">

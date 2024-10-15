@@ -1,9 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//admin
+use App\Http\Controllers\Admin\AdminController;
+
+//client
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\AboutController;
+use App\Http\Middleware\CheckRoleAdminMiddleware;
 use App\Http\Controllers\Client\ContactController;
 
 
@@ -22,3 +27,11 @@ Route::get('/account', [AuthController::class, 'account'])->name('account');
 Route::get('/viewRegister', [AuthController::class, 'viewRegister'])->name('viewRegister');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//login success + admin
+Route::middleware('auth')->group(function () {
+    Route::get('/loginSuccess', [AuthController::class, 'loginSuccess'])->name('loginSuccess')->middleware('auth');
+    Route::middleware(['auth', CheckRoleAdminMiddleware::class])->group(function () {
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    });
+});
