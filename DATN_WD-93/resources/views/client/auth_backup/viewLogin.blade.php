@@ -88,11 +88,11 @@ use Illuminate\Support\Facades\File;
                       @enderror
                       <div class="d-flex mt-2 justify-content-between">
                         <small>
-                            {{-- @if (Route::has('password.request'))
+                            @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
-                        @endif --}}
+                        @endif
                         </small>
                         <br />
                         <small>
@@ -101,10 +101,10 @@ use Illuminate\Support\Facades\File;
                       </div>
                     </div>
                     <div>
-                      <div class="custom-control custom-checkbox align-items-center">
+                      {{-- <div class="custom-control custom-checkbox align-items-center">
                         <input type="checkbox" class="custom-control-input" value="remember-me" name="remember-me" checked />
                         <label class="custom-control-label text-small">Remember me next time</label>
-                      </div>
+                      </div> --}}
                     </div>
                     <div class="text-center mt-3">
                       <input type="submit" href="#" class="btn btn-lg btn-primary" value="Login" name="dangnhap">

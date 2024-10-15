@@ -43,12 +43,12 @@
                                     </div>
                                     <div class="form-group">
                                             <li><a href="">My order </a></li>
-                                           {{-- <li>  @if (Route::has('password.request'))
+                                           <li>  @if (Route::has('password.request'))
                                             <a href="{{ route('password.request') }}">
                                                 {{ __('Forgot Password?') }}
                                             </a>
                                                 @endif
-                                            </li> --}}
+                                            </li>
                                             <li> <a href="">Edit account </a> </li>
                                             <li> <a href="../admin">Login admin </a></li>
                                             <form action="{{ route('logout') }}" method="POST">
