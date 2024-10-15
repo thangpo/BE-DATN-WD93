@@ -1,50 +1,53 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function viewLogin()
+    {
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('client.auth_backup.viewLogin', compact('categories'));
+    }
     // public function viewLogin()
     // {
     //     $categories = Category::orderBy('name', 'asc')->get();
-    //     return view('client.auth_backup.viewLogin', compact('categories'));
+    //     return view('auth.login', compact('categories'));
     // }
-    // // public function viewLogin()
-    // // {
-    // //     $categories = Category::orderBy('name', 'asc')->get();
-    // //     return view('auth.login', compact('categories'));
-    // // }
-    // public function login(Request $request)
-    // {
-    //     $accounts = $request->validate([
-    //         'email' => ['required' => 'string', 'email', 'max:255'],
-    //         'password' => ['required' => 'string']
-    //     ]);
-    //     //   dd($accounts);
-    //     if (Auth::attempt($accounts)) {
-    //         return redirect()->route('loginSuccess');
-    //     }
-    //     return redirect()->back()->withErrors([
-    //         'email' => 'Infor account not found'
-    //     ]);
-    // }
-    // public function loginSuccess()
-    // {
-    //     $categories = Category::orderBy('name', 'asc')->get();
-    //     return view('client.auth_backup.loginSuccess', compact('categories'));
-    // }
-    // public function account()
-    // {
-    //     $categories = Category::orderBy('name', 'asc')->get();
-    //     return view('client.auth_backup.account', compact('categories'));
-    // }
-    // public function viewEditAcc()
-    // {
-    //     $categories = Category::orderBy('name', 'asc')->get();
-    //     return view('client.auth_backup.editAcc', compact('categories'));
-    // }
+    public function login(Request $request)
+    {
+        $accounts = $request->validate([
+            'email' => ['required' => 'string', 'email', 'max:255'],
+            'password' => ['required' => 'string']
+        ]);
+        //   dd($accounts);
+        if (Auth::attempt($accounts)) {
+            return redirect()->route('loginSuccess');
+        }
+        return redirect()->back()->withErrors([
+            'email' => 'Infor account not found'
+        ]);
+    }
+    public function loginSuccess()
+    {
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('client.auth_backup.loginSuccess', compact('categories'));
+    }
+    public function account()
+    {
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('client.auth_backup.account', compact('categories'));
+    }
+    public function viewEditAcc()
+    {
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('client.auth_backup.editAcc', compact('categories'));
+    }
     // public function editAcc(Request $request)
     // {
     //     $validatedData = $request->validate([
@@ -84,11 +87,11 @@ class AuthController extends Controller
 
     //     return redirect()->route('viewEditAcc')->with('success', 'Update acc successfully');
     // }
-    // public function viewRegister()
-    // {
-    //     $categories = Category::orderBy('name', 'asc')->get();
-    //     return view('client.auth_backup.register', compact('categories'));
-    // }
+    public function viewRegister()
+    {
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('client.auth_backup.register', compact('categories'));
+    }
     // public function register(Request $request)
     // {
     //     $data = $request->validate([
