@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 //admin
 use Illuminate\Support\Facades\Route;
-
-//client
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+//client
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\AboutController;
@@ -44,3 +44,56 @@ Route::get('/login', [AuthController::class, 'viewLogin'])->name('viewLogin');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/viewEditAcc', [AuthController::class, 'viewEditAcc'])->name('viewEditAcc');
 Route::post('/editAcc', [AuthController::class, 'editAcc'])->name('editAcc');
+
+//admin
+
+//admin
+Route::middleware(['auth', CheckRoleAdminMiddleware::class])->prefix('admin')
+    ->as('admin.')
+    ->group(function () {
+        Route::get('/dashborad', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+        //categories
+        Route::prefix('categories')
+            ->as('categories.')
+            ->group(function () {
+                Route::get('/categoriesList', [CategoryController::class, 'categoriesList'])->name('categoriesList');
+                Route::get('/viewCateAdd', [CategoryController::class, 'viewCateAdd'])->name('viewCateAdd');
+                Route::post('/cateAdd', [CategoryController::class, 'cateAdd'])->name('cateAdd');
+                Route::get('/cateUpdateForm/{id}', [CategoryController::class, 'cateUpdateForm'])->name('cateUpdateForm');
+                Route::post('/cateUpdate', [CategoryController::class, 'cateUpdate'])->name('cateUpdate');
+                Route::delete('/cateDestroy/{id}', [CategoryController::class, 'cateDestroy'])->name('cateDestroy');
+            });
+        //products
+        // Route::prefix('products')
+        //     ->as('products.')
+        //     ->group(function () {
+        //         Route::get('/productList', [AdminController::class, 'productList'])->name('productList');
+        //         Route::get('/viewProAdd', [AdminController::class, 'viewProAdd'])->name('viewProAdd');
+        //         Route::post('/productAdd', [AdminController::class, 'productAdd'])->name('productAdd');
+        //         Route::get('/productUpdateForm/{id}', [AdminController::class, 'productUpdateForm'])->name('productUpdateForm');
+        //         Route::post('/productUpdate', [AdminController::class, 'productUpdate'])->name('productUpdate');
+        //         Route::delete('/productDestroy/{id}', [AdminController::class, 'productDestroy'])->name('productDestroy');
+        //     });
+        //order
+        // Route::prefix('bills')
+        //     ->as('bills.')
+        //     ->group(function () {
+        //         Route::get('/',               [BillsController::class, 'index'])->name('index');
+        //         Route::get('/show/{id}',     [BillsController::class, 'show'])->name('show');
+        //         Route::put('{id}/update',    [BillsController::class, 'update'])->name('update');
+        //         Route::delete('{id}/destroy', [BillsController::class, 'destroy'])->name('destroy');
+        //     });
+        //account
+        // Route::prefix('account')
+        //     ->as('account.')
+        //     ->group(function () {
+        //         Route::get('/accountList', [AccountController::class, 'accountList'])->name('accountList');
+        //         Route::get('/viewAccAdd', [AccountController::class, 'viewAccAdd'])->name('viewAccAdd');
+        //         Route::post('/accAdd', [AccountController::class, 'accAdd'])->name('accAdd');
+        //         Route::get('/accUpdateForm/{id}', [AccountController::class, 'accUpdateForm'])->name('accUpdateForm');
+        //         Route::post('/accUpdate', [AccountController::class, 'accUpdate'])->name('accUpdate');
+        //         Route::delete('/accDestroy/{id}', [AccountController::class, 'accDestroy'])->name('accDestroy');
+        //     });
+    });

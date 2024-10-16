@@ -49,8 +49,8 @@
 
                 <div class="collapse" id="collapseCate" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="">List categories</a>
-                        <a class="nav-link" href="">Add categories</a>
+                        <a class="nav-link" href="{{ route('admin.categories.categoriesList') }}">List categories</a>
+                        <a class="nav-link" href="{{ route('admin.categories.viewCateAdd') }}">Add categories</a>
                     </nav>
                 </div>
 
