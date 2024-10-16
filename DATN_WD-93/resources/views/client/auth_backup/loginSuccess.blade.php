@@ -49,7 +49,7 @@
                                             </a>
                                                 @endif
                                             </li>
-                                            <li> <a href="">Edit account </a> </li>
+                                            <li> <a href="{{ route('viewEditAcc') }}">Edit account </a> </li>
                                             <li> <a href="../admin">Login admin </a></li>
                                             <form action="{{ route('logout') }}" method="POST">
                                                 @csrf
