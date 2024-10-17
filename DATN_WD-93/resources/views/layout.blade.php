@@ -122,7 +122,7 @@
               >Instinct</span
             >
             <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1"
-              >Shop</span
+              >Pharmacy</span
             >
           </a>
         </div>

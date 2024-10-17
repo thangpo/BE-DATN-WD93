@@ -67,8 +67,8 @@
 
                 <div class="collapse" id="collapseProduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="">List product</a>
-                        <a class="nav-link" href="">Add product</a>
+                        <a class="nav-link" href="{{ route('admin.products.productList') }}">List product</a>
+                        <a class="nav-link" href="{{ route('admin.products.viewProAdd') }}">Add product</a>
                     </nav>
                 </div>
 

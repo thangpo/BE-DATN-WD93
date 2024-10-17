@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 //client
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\HomeController;
@@ -46,9 +47,7 @@ Route::get('/viewEditAcc', [AuthController::class, 'viewEditAcc'])->name('viewEd
 Route::post('/editAcc', [AuthController::class, 'editAcc'])->name('editAcc');
 
 //admin
-
-//admin
-Route::middleware(['auth', CheckRoleAdminMiddleware::class])->prefix('admin')
+Route::middleware(['auth', 'auth.admin'])->prefix('admin')
     ->as('admin.')
     ->group(function () {
         Route::get('/dashborad', function () {
@@ -66,16 +65,16 @@ Route::middleware(['auth', CheckRoleAdminMiddleware::class])->prefix('admin')
                 Route::delete('/cateDestroy/{id}', [CategoryController::class, 'cateDestroy'])->name('cateDestroy');
             });
         //products
-        // Route::prefix('products')
-        //     ->as('products.')
-        //     ->group(function () {
-        //         Route::get('/productList', [AdminController::class, 'productList'])->name('productList');
-        //         Route::get('/viewProAdd', [AdminController::class, 'viewProAdd'])->name('viewProAdd');
-        //         Route::post('/productAdd', [AdminController::class, 'productAdd'])->name('productAdd');
-        //         Route::get('/productUpdateForm/{id}', [AdminController::class, 'productUpdateForm'])->name('productUpdateForm');
-        //         Route::post('/productUpdate', [AdminController::class, 'productUpdate'])->name('productUpdate');
-        //         Route::delete('/productDestroy/{id}', [AdminController::class, 'productDestroy'])->name('productDestroy');
-        //     });
+        Route::prefix('products')
+            ->as('products.')
+            ->group(function () {
+                Route::get('/productList', [ProductController::class, 'productList'])->name('productList');
+                Route::get('/viewProAdd', [ProductController::class, 'viewProAdd'])->name('viewProAdd');
+                Route::post('/productAdd', [ProductController::class, 'productAdd'])->name('productAdd');
+                Route::get('/productUpdateForm/{id}', [ProductController::class, 'productUpdateForm'])->name('productUpdateForm');
+                Route::post('/productUpdate', [ProductController::class, 'productUpdate'])->name('productUpdate');
+                Route::delete('/productDestroy/{id}', [ProductController::class, 'productDestroy'])->name('productDestroy');
+            });
         //order
         // Route::prefix('bills')
         //     ->as('bills.')
