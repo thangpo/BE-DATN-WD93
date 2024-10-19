@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SpecialtyController;
 //client
@@ -84,6 +85,23 @@ Route::middleware(['auth', 'auth.admin'])->prefix('admin')
                 Route::post('/specialtyAdd', [SpecialtyController::class, 'store']);
                 Route::put('/specialtyUpdate/{id}', [SpecialtyController::class, 'update']);
                 Route::delete('/specialtyDestroy/{id}', [SpecialtyController::class, 'destroy']);
+            });
+        //doctors
+        Route::prefix('doctors')
+            ->as('doctors.')
+            ->group(function () {
+                Route::get('/doctorsList', [DoctorController::class, 'index'])->name('doctors.index');
+                Route::post('/doctorsAdd', [DoctorController::class, 'store'])->name('doctors.store');
+                Route::get('/doctorsEdit/{id}', [DoctorController::class, 'show'])->name('doctors.show');
+                Route::get('/doctorsDetails/{id}', [DoctorController::class, 'showDetails']);
+                Route::put('/doctorsUpdate/{id}', [DoctorController::class, 'update'])->name('doctors.update');
+                Route::delete('/doctorsDestroy/{id}', [DoctorController::class, 'destroy'])->name('doctors.destroy');
+
+                Route::get('/doctor/schedule/{doctorId}', [DoctorController::class, 'showSchedule'])->name('doctor.schedule');
+                Route::post('/doctor/scheduleAdd', [DoctorController::class, 'scheduleAdd']);
+                Route::get('/doctor/scheduleEdit/{id}', [DoctorController::class, 'scheduleEdit']);
+                Route::put('/doctor/scheduleUpdate/{id}', [DoctorController::class, 'scheduleUpdate']);
+                Route::delete('/doctor/scheduleDestroy/{id}', [DoctorController::class, 'scheduleDestroy']);
             });
         //order
         // Route::prefix('bills')

@@ -64,13 +64,10 @@
 
                     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
                     <script>
-                        // Initialize CKEditor
                         var editor = CKEDITOR.replace('specialtyDescription');
-
-                        // Function to reset the CKEditor when the modal is closed
                         var addEditSpecialtyModal = document.getElementById('addEditSpecialtyModal');
                         addEditSpecialtyModal.addEventListener('hidden.bs.modal', function () {
-                            editor.setData(''); // Clear CKEditor data
+                            editor.setData('');
                         });
                     </script>
 
@@ -89,7 +86,7 @@
         document.getElementById('modalLabel').innerText = 'Thêm mới chuyên ngành';
         document.getElementById('specialtyId').value = '';
         document.getElementById('specialtyName').value = '';
-        CKEDITOR.instances['specialtyDescription'].setData(''); // Clear CKEditor data
+        CKEDITOR.instances['specialtyDescription'].setData(''); 
         document.getElementById('addEditSpecialtyForm').onsubmit = addSpecialty;
     }
 
@@ -98,13 +95,11 @@
         document.getElementById('specialtyId').value = id;
         document.getElementById('specialtyName').value = name;
 
-        // Set existing description
-        CKEDITOR.instances['specialtyDescription'].setData(description); // Set existing data for CKEditor
+        CKEDITOR.instances['specialtyDescription'].setData(description); 
 
-        // Show the modal
         let modal = new bootstrap.Modal(document.getElementById('addEditSpecialtyModal'));
         modal.show();
-        document.getElementById('addEditSpecialtyForm').onsubmit = updateSpecialty; // Set the submit function to update
+        document.getElementById('addEditSpecialtyForm').onsubmit = updateSpecialty; 
     }
 
     function addSpecialty(e) {
@@ -124,7 +119,7 @@
                     let newRow = `<tr id="specialty-row-${specialty.id}" class="category-item" data-name="${specialty.name}">
                             <td>${specialty.id}</td>
                             <td>${specialty.name}</td>
-                           <td>${truncateString(specialty.description, 100)}</td>
+                            <td>${truncateString(specialty.description, 100)}</td>
                             <td>${new Date(specialty.created_at).toLocaleDateString()}</td>
                             <td>
                                 <button class="btn btn-warning btn-sm" onclick="showEditForm(${specialty.id}, '${specialty.name}', \`${specialty.description}\`)">Sửa</button>
@@ -202,7 +197,6 @@
         }
     }
 
-    // Function to handle errors
     function handleErrors(error) {
         if (error.response && error.response.data.errors) {
             let errors = error.response.data.errors;
